@@ -1,0 +1,456 @@
+I'll create a simple personal webpage for you to advertise yourself. This will include sections for your CV, picture, and university projects.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .profile-contact {
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .cv-container {
+            background-color: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .cv-section {
+            margin-bottom: 30px;
+        }
+        
+        .cv-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .cv-item {
+            margin-bottom: 20px;
+        }
+        
+        .cv-item h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cv-item p.cv-date {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .project-content p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .project-tag {
+            background-color: var(--light-bg);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+        
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container profile-container">
+            <img src="/api/placeholder/200/200" alt="Profile Picture" class="profile-image">
+            <h1 class="profile-name">Your Name</h1>
+            <p class="profile-title">Your Professional Title</p>
+            <div class="profile-contact">
+                <p>📧 your.email@example.com</p>
+                <p>📱 (123) 456-7890</p>
+                <p>📍 Your Location</p>
+            </div>
+            <div class="social-links">
+                <a href="#" title="LinkedIn">LinkedIn</a>
+                <a href="#" title="GitHub">GitHub</a>
+                <a href="#" title="Twitter">Twitter</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hello! I'm [Your Name], a [Your Profession] with a passion for [Your Passion]. I have [X] years of experience in [Your Field] and I'm dedicated to [Your Goal/Mission].</p>
+                    <p>I graduated from [Your University] with a degree in [Your Major]. During my academic journey, I developed strong skills in [Your Skills] and completed several projects that showcase my abilities.</p>
+                    <p>When I'm not working, I enjoy [Your Hobbies/Interests]. I believe that [Your Personal Philosophy/Approach to Work].</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="cv" style="background-color: var(--light-bg);">
+        <div class="container">
+            <h2>Curriculum Vitae</h2>
+            <div class="cv-container">
+                <div class="cv-section">
+                    <h3>Education</h3>
+                    <div class="cv-item">
+                        <h4>Bachelor/Master of [Your Degree]</h4>
+                        <p class="cv-date">20XX - 20XX</p>
+                        <p>[Your University Name]</p>
+                        <p>GPA: X.X/4.0</p>
+                        <p>Relevant Coursework: [Course 1], [Course 2], [Course 3]</p>
+                    </div>
+                </div>
+                
+                <div class="cv-section">
+                    <h3>Work Experience</h3>
+                    <div class="cv-item">
+                        <h4>[Job Title] at [Company Name]</h4>
+                        <p class="cv-date">Month 20XX - Present</p>
+                        <ul>
+                            <li>Accomplished [specific achievement] resulting in [specific outcome]</li>
+                            <li>Developed [specific project/feature] using [specific technologies]</li>
+                            <li>Collaborated with [specific teams/departments] to [specific goal]</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="cv-item">
+                        <h4>[Previous Job Title] at [Previous Company Name]</h4>
+                        <p class="cv-date">Month 20XX - Month 20XX</p>
+                        <ul>
+                            <li>Improved [specific process/system] by [specific action] which led to [specific result]</li>
+                            <li>Managed [specific project/team] responsible for [specific outcome]</li>
+                            <li>Implemented [specific solution] to address [specific challenge]</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="cv-section">
+                    <h3>Skills</h3>
+                    <div class="cv-item">
+                        <h4>Technical Skills</h4>
+                        <p>[Technical Skill 1], [Technical Skill 2], [Technical Skill 3], [Technical Skill 4]</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4>Soft Skills</h4>
+                        <p>[Soft Skill 1], [Soft Skill 2], [Soft Skill 3], [Soft Skill 4]</p>
+                    </div>
+                    <div class="cv-item">
+                        <h4>Languages</h4>
+                        <p>[Language 1] (Native), [Language 2] (Fluent), [Language 3] (Intermediate)</p>
+                    </div>
+                </div>
+                
+                <div class="cv-section">
+                    <h3>Certifications</h3>
+                    <div class="cv-item">
+                        <h4>[Certification Name]</h4>
+                        <p class="cv-date">Issued: Month 20XX</p>
+                        <p>Issuing Organization: [Organization Name]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>University Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Project 1" class="project-image">
+                    <div class="project-content">
+                        <h3>Project Title 1</h3>
+                        <p class="cv-date">Course: [Course Name]</p>
+                        <p>Description of your first university project. What problem did it solve? What technologies did you use? What was your role?</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Tech 1</span>
+                            <span class="project-tag">Tech 2</span>
+                            <span class="project-tag">Tech 3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Project 2" class="project-image">
+                    <div class="project-content">
+                        <h3>Project Title 2</h3>
+                        <p class="cv-date">Course: [Course Name]</p>
+                        <p>Description of your second university project. What problem did it solve? What technologies did you use? What was your role?</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Tech 1</span>
+                            <span class="project-tag">Tech 2</span>
+                            <span class="project-tag">Tech 3</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <img src="/api/placeholder/300/200" alt="Project 3" class="project-image">
+                    <div class="project-content">
+                        <h3>Project Title 3</h3>
+                        <p class="cv-date">Course: [Course Name]</p>
+                        <p>Description of your third university project. What problem did it solve? What technologies did you use? What was your role?</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Tech 1</span>
+                            <span class="project-tag">
+```
